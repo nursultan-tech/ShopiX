@@ -22,51 +22,53 @@ class _BottomNavControllerState extends State<BottomNavController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: const Text(
-          "E-Commerce",
-          style: TextStyle(color: Colors.black),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.teal,
+          elevation: 0,
+          title: const Text(
+            "E-Commerce",
+            style: TextStyle(color: Colors.black),
+          ),
+          centerTitle: true,
+          automaticallyImplyLeading: false,
         ),
-        centerTitle: true,
-        automaticallyImplyLeading: false,
+        bottomNavigationBar: BottomNavigationBar(
+          elevation: 5,
+          selectedItemColor: AppColors.deep_orange,
+          backgroundColor: Colors.white,
+          unselectedItemColor: Colors.grey,
+          currentIndex: _currentIndex,
+          selectedLabelStyle:
+              const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'home'
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.favorite_outline),
+              label: 'favourite'
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.add_shopping_cart),
+              label: 'my cart'
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'profile'
+            ),
+          ],
+          onTap: (index) {
+            setState(() {
+              _currentIndex = index;
+              print(_currentIndex);
+            });
+          },
+        ),
+        body: _pages[_currentIndex],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        elevation: 5,
-        selectedItemColor: AppColors.deep_orange,
-        backgroundColor: Colors.white,
-        unselectedItemColor: Colors.grey,
-        currentIndex: _currentIndex,
-        selectedLabelStyle:
-            const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'home'
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite_outline),
-            label: 'favourite'
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add_shopping_cart),
-            label: 'my cart'
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'profile'
-          ),
-        ],
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-            print(_currentIndex);
-          });
-        },
-      ),
-      body: _pages[_currentIndex],
     );
   }
 }
